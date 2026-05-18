@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --primaryColor: rgb(231, 7, 164);
+  --primaryHover: rgba(231, 7, 164, 0.267);
+  --primaryText: white;
+  --primaryBorder: solid 1px white;
+  --primaryShadow: 5px 5px 15px 5px rgba(189, 189, 189, 0.5);
+  --primaryBorderRadius: 0.2rem;
+}
+body {
+  min-height: 100vh;
+}
+/* Defaults */
+input,
+input:focus {
+  outline: none;
+  border: none;
+}
+textarea,
+textarea:focus {
+  outline: none;
+  border: none;
+}
+
+.note-Btn {
+  border-radius: var(--primaryBorderRadius);
+  border: var(--primaryBorder);
+  color: var(--primaryText);
+  background-color: var(--primaryColor);
+  padding: 1rem;
+}
+.svg-note {
+  width: 1rem;
+  color: var(--primaryText);
+}
+.app-Content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 100vh;
+}
+
+/* SideBar */
+.sidebar {
+  padding: 1rem;
+  box-shadow: var(--primaryShadow);
+}
+
+/* Note Content */
+.note-Content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.2rem;
+  gap: 1rem;
+}
+
+.add-Note-btn {
+  width: 100%;
+}
+
+.svg-Add {
+  width: 0.7rem;
+}
+.note-Content-Header {
+  width: 100%;
+  display: flex;
+  margin-left: 1rem;
+  gap: 1rem;
+}
+#input-Headline-Note {
+  font-weight: bold;
+  font-size: 2.2rem;
+  width: 80%;
+}
+#input-Note-Content {
+  margin-left: 1rem;
+  width: 100%;
+  min-height: 100%;
+}
