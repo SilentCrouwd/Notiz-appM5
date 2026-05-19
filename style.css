@@ -31,7 +31,10 @@ textarea:focus {
   outline: none;
   border: none;
 }
-
+input::placeholder,
+textarea::placeholder {
+  color: gray;
+}
 .note-Btn {
   border-radius: var(--primaryBorderRadius);
   border: var(--primaryBorder);
@@ -41,6 +44,7 @@ textarea:focus {
   cursor: pointer;
 }
 .note-Btn:hover {
+  transition: all 0.3s ease;
   background-color: var(--primaryHover);
 }
 .svg-note {
@@ -60,8 +64,7 @@ textarea:focus {
 .sidebar {
   box-shadow: var(--primaryShadow);
   padding: 1.5rem 1rem;
-  overflow-y: scroll;
-  scrollbar-width: none;
+  overflow: auto;
 }
 
 .add-Note-btn {
@@ -112,16 +115,18 @@ textarea:focus {
 .note-Card {
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   padding: 1.5rem;
   box-shadow: var(--primaryShadow);
   gap: 1rem;
+  border-radius: var(--primaryBorderRadius);
 }
-.note-Card:hover {
-  background-color: var(--primaryHover-Card);
-}
+.note-Card:hover,
 .selected-Card {
+  transition: all 0.3s ease;
   background-color: var(--primaryHover-Card);
+}
+.note-Card:not(.selected-Card) {
+  cursor: pointer;
 }
 .card-Headline {
   white-space: nowrap;
@@ -132,7 +137,7 @@ textarea:focus {
 .card-Text {
   color: var(--secondaryText);
   font-size: 0.8rem;
-
+  font-style: italic;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
