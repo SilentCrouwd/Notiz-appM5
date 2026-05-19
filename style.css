@@ -123,10 +123,19 @@ textarea:focus {
 .selected-Card {
   background-color: var(--primaryHover-Card);
 }
+.card-Headline {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .card-Timestomp,
 .card-Text {
   color: var(--secondaryText);
   font-size: 0.8rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-Timestomp {
   text-align: right;
