@@ -2,8 +2,10 @@ const noteListEl = document.querySelector(".note-List");
 const headlineEl = document.getElementById("input-Headline-Note");
 const noteContentEl = document.getElementById("input-Note-Content");
 const saveBtn = document.querySelector(".btn-Save");
+const deleteBtn = document.querySelector(".btn-Del");
 
 saveBtn.addEventListener("click", createNote);
+deleteBtn.addEventListener("click", delNotes);
 
 function showNotes(notesArray) {
   if (notesArray.length > 2) {
@@ -32,7 +34,12 @@ function showNotes(notesArray) {
 }
 
 function createNote() {
-  if (headlineEl.vale || noteContentEl.value) {
+  const title = headlineEl.value;
+  const content = noteContentEl.value;
+  if (!content || !title) {
+    alert("Bitte Titel und Inhalt eingeben");
+    return;
+  } else {
     let newNoteObj = {
       title: headlineEl.value,
       content: noteContentEl.value,
@@ -42,9 +49,12 @@ function createNote() {
     notesData.push(newNoteObj);
     showNotes(notesData);
     setLocalStorage();
-  } else {
-    alert("Bitte Titel und Inhalt eingeben");
-    return;
   }
+}
+
+function delNotes() {
+  notesData = [];
+  setLocalStorage();
+  showNotes(notesData);
 }
 showNotes(notesData);
