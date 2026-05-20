@@ -1,28 +1,16 @@
 const noteListEl = document.querySelector(".note-List");
+const headlineEl = document.getElementById("input-Headline-Note");
+const noteContentEl = document.getElementById("input-Note-Content");
+const saveBtn = document.querySelector(".btn-Save");
 
-const notesData = [
-  {
-    title: "Notiz 1",
-    content: "Lorem Ipsum",
-    id: 1,
-    lastUpdated: new Date().getTime(),
-  },
-  {
-    title: "Notiz 2",
-    content: "Lorem Ipsum",
-    id: 2,
-    lastUpdated: new Date().getTime(),
-  },
-  {
-    title: "Notiz 3",
-    content: "Lorem Ipsum",
-    id: 3,
-    lastUpdated: new Date().getTime(),
-  },
-];
+saveBtn.addEventListener("click", createNote);
 
 function showNotes(notesArray) {
-  notesArray.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+  if (notesArray.length > 2) {
+    notesArray.sort(
+      (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated),
+    );
+  }
   let html = "";
 
   notesArray.forEach((note) => {
@@ -41,29 +29,22 @@ function showNotes(notesArray) {
     `;
   });
   noteListEl.innerHTML = html;
-  //   notesArray.forEach((element) => {
-  //     const noteListEl = document.querySelector(".note-List");
-
-  //     const newCard = document.createElement("div");
-  //     newCard.classList.add("note-Card");
-
-  //     const newCardHeadline = document.createElement("h2");
-  //     newCardHeadline.innerHTML = element.title;
-  //     newCard.appendChild(newCardHeadline);
-  //     newCardHeadline.classList.add("card-Headline");
-
-  //     const newCardText = document.createElement("p");
-  //     newCardText.innerHTML = element.content;
-  //     newCard.appendChild(newCardText);
-  //     newCardText.classList.add("card-Text");
-
-  //     const newCardTimestomp = document.createElement("p");
-  //     newCardTimestomp.innerHTML = element.lastUpdated;
-  //     newCard.appendChild(newCardTimestomp);
-  //     newCardTimestomp.classList.add("card-Timestomp");
-
-  //     noteListEl.appendChild(newCard);
-  //   });
 }
 
+function createNote() {
+  if (headlineEl.vale || noteContentEl.value) {
+    let newNoteObj = {
+      title: headlineEl.value,
+      content: noteContentEl.value,
+      id: 2,
+      lastUpdated: new Date().getTime(),
+    };
+    notesData.push(newNoteObj);
+    showNotes(notesData);
+    setLocalStorage();
+  } else {
+    alert("Bitte Titel und Inhalt eingeben");
+    return;
+  }
+}
 showNotes(notesData);
