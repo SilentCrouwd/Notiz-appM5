@@ -1,6 +1,8 @@
 const noteListEl = document.querySelector(".note-List");
+
 const headlineEl = document.getElementById("input-Headline-Note");
 const noteContentEl = document.getElementById("input-Note-Content");
+
 const saveBtn = document.querySelector(".btn-Save");
 const deleteBtn = document.querySelector(".btn-Del");
 
@@ -43,7 +45,7 @@ function createNote() {
     let newNoteObj = {
       title: headlineEl.value,
       content: noteContentEl.value,
-      id: 2,
+      id: getId(),
       lastUpdated: new Date().getTime(),
     };
     notesData.push(newNoteObj);
@@ -57,4 +59,17 @@ function delNotes() {
   setLocalStorage();
   showNotes(notesData);
 }
+
+function getId() {
+  const notes = notesData;
+
+  const sortedNotes = notes.sort((a, b) => a.id - b.id);
+  let nextId = 1;
+  for (let note of sortedNotes) {
+    if (nextId < note.id) break;
+    nextId = note.id + 1;
+  }
+  return nextId;
+}
+
 showNotes(notesData);

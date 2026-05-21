@@ -47,7 +47,7 @@ textarea::placeholder {
   transition: all 0.3s ease;
   background-color: var(--primaryHover);
 }
-.svg-note {
+.svg-Default {
   width: 2rem;
 
   color: var(--primaryText);
