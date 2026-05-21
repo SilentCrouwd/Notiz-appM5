@@ -43,8 +43,8 @@ function createNote() {
     return;
   } else {
     let newNoteObj = {
-      title: headlineEl.value,
-      content: noteContentEl.value,
+      title,
+      content,
       id: getId(),
       lastUpdated: new Date().getTime(),
     };
@@ -72,4 +72,4 @@ function getId() {
   return nextId;
 }
 
-showNotes(notesData);
+showNotes(getLocalStorage());

@@ -1,11 +1,12 @@
 let notesData = [];
-
-getLocalStorage();
+const LOCAL_STORAGE_KEY = "savedNotes";
 
 function setLocalStorage() {
-  localStorage.setItem("savedNotes", JSON.stringify(notesData));
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notesData));
 }
 function getLocalStorage() {
-  if (localStorage.getItem("savedNotes"))
-    notesData = JSON.parse(localStorage.getItem("savedNotes"));
+  if (localStorage.getItem(LOCAL_STORAGE_KEY) !== "")
+    notesData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+
+  return notesData;
 }
