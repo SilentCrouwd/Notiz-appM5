@@ -6,7 +6,11 @@ const noteContentEl = document.getElementById("input-Note-Content");
 const saveBtn = document.querySelector(".btn-Save");
 const deleteBtn = document.querySelector(".btn-Del");
 
-saveBtn.addEventListener("click", createNote);
+saveBtn.addEventListener("click", () => {
+  const title = headlineEl.value;
+  const content = noteContentEl.value;
+  createNote(title, content);
+});
 deleteBtn.addEventListener("click", delNotes);
 
 function showNotes(notesArray) {
@@ -35,9 +39,7 @@ function showNotes(notesArray) {
   noteListEl.innerHTML = html;
 }
 
-function createNote() {
-  const title = headlineEl.value;
-  const content = noteContentEl.value;
+function createNote(title, content) {
   if (!content || !title) {
     alert("Bitte Titel und Inhalt eingeben");
     return;
