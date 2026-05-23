@@ -1,3 +1,4 @@
+
 let notesData = [];
 const LOCAL_STORAGE_KEY = "savedNotes";
 
