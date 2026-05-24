@@ -3,16 +3,19 @@ const headlineEl = document.getElementById("input-Headline-Note");
 const noteContentEl = document.getElementById("input-Note-Content");
 const saveBtn = document.querySelector(".btn-Save");
 const deleteBtn = document.querySelector(".btn-Del");
-let glabalChosedId = "";
 
 showNotes(getLocalStorage());
 
 saveBtn.addEventListener("click", () => {
   const title = headlineEl.value;
   const content = noteContentEl.value;
-  let id = glabalChosedId;
+  let currId = undefined;
 
-  createNote(title, content, id);
+  const currSelectedNoteEl = document.querySelector(".selected-Card");
+  if (currSelectedNoteEl) {
+    currId = currSelectedNoteEl.getAttribute("data-id");
+  }
+  createNote(title, content, Number(currId));
 });
 
 deleteBtn.addEventListener("click", delNotes);
@@ -42,8 +45,7 @@ function showNotes(notesArray) {
   const noteCard = document.querySelectorAll(".note-Card");
   noteCard.forEach((cardEl) => {
     cardEl.addEventListener("click", () => {
-      glabalChosedId = cardEl.dataset.id;
-      console.log(glabalChosedId);
+      selectNote(cardEl.getAttribute("data-id"));
       const selectedHeadline = cardEl.querySelector(".card-Headline").innerHTML;
       headlineEl.value = selectedHeadline;
       const selectedContent = cardEl.querySelector(".card-Text").innerHTML;
@@ -51,8 +53,8 @@ function showNotes(notesArray) {
     });
   });
 }
-
-function createNote(title, content, id) {
+function createNote(title, content, id = undefined) {
+  alert(id);
   if (!content || !title) {
     alert("Bitte Titel und Inhalt eingeben");
     return;
@@ -63,6 +65,7 @@ function createNote(title, content, id) {
       id: getId(),
       lastUpdated: new Date().getTime(),
     };
+
     notesData.push(newNoteObj);
 
     showNotes(notesData);
@@ -90,4 +93,15 @@ function getId() {
     nextId = note.id + 1;
   }
   return nextId;
+}
+function selectNote(id) {
+  const selectedNoteEl = document.querySelector(`.note-Card[data-id="${id}"]`);
+  if (selectedNoteEl.classList.contains("selected-Card")) return;
+
+  const noteEntriesEl = document.querySelectorAll(".note-Card");
+  noteEntriesEl.forEach((note) => {
+    note.classList.remove("selected-Card");
+  });
+
+  selectedNoteEl.classList.add("selected-Card");
 }
