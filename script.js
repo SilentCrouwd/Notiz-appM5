@@ -3,22 +3,30 @@ const headlineEl = document.getElementById("input-Headline-Note");
 const noteContentEl = document.getElementById("input-Note-Content");
 const saveBtn = document.querySelector(".btn-Save");
 const deleteBtn = document.querySelector(".btn-Del");
-
+const createNewNoteBtn = document.getElementById("add-Note");
 showNotes(getLocalStorage());
 
-saveBtn.addEventListener("click", () => {
+createNewNoteBtn.addEventListener("click", createNewNote);
+saveBtn.addEventListener("click", saveNewNote);
+
+deleteBtn.addEventListener("click", delNotes);
+
+function saveNewNote() {
   const title = headlineEl.value;
   const content = noteContentEl.value;
   let currId = undefined;
 
-  const currSelectedNoteEl = document.querySelector(".selected-Card");
-  if (currSelectedNoteEl) {
-    currId = currSelectedNoteEl.getAttribute("data-id");
+  if (!content || !title) {
+    alert("Bitte Titel und Inhalt eingeben");
+    return;
+  } else {
+    const currSelectedNoteEl = document.querySelector(".selected-Card");
+    if (currSelectedNoteEl) {
+      currId = currSelectedNoteEl.getAttribute("data-id");
+    }
+    createNote(title, content, Number(currId));
   }
-  createNote(title, content, Number(currId));
-});
-
-deleteBtn.addEventListener("click", delNotes);
+}
 
 function showNotes(notesArray) {
   notesArray.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
@@ -41,23 +49,22 @@ function showNotes(notesArray) {
     `;
   });
   noteListEl.innerHTML = html;
-
-  const noteCard = document.querySelectorAll(".note-Card");
-  noteCard.forEach((cardEl) => {
-    cardEl.addEventListener("click", () => {
-      selectNote(cardEl.getAttribute("data-id"));
-      const selectedHeadline = cardEl.querySelector(".card-Headline").innerHTML;
-      headlineEl.value = selectedHeadline;
-      const selectedContent = cardEl.querySelector(".card-Text").innerHTML;
-      noteContentEl.value = selectedContent;
-    });
-  });
+  setListeners();
 }
+
 function createNote(title, content, id = undefined) {
-  alert(id);
-  if (!content || !title) {
-    alert("Bitte Titel und Inhalt eingeben");
-    return;
+  if (id) {
+    const indexOfNoteWithId = notesData.findIndex((note) => note.id === id);
+    if (indexOfNoteWithId > -1) {
+      notesData[indexOfNoteWithId] = {
+        title,
+        content,
+        id,
+        lastUpdated: new Date().getTime(),
+      };
+      setLocalStorage();
+      showNotes(notesData);
+    }
   } else {
     let newNoteObj = {
       title,
@@ -70,17 +77,26 @@ function createNote(title, content, id = undefined) {
 
     showNotes(notesData);
     setLocalStorage();
+
+    headlineEl.value = "";
+    noteContentEl.value = "";
   }
-  headlineEl.value = "";
-  noteContentEl.value = "";
 }
 
 function delNotes() {
-  notesData = [];
-  setLocalStorage();
-  showNotes(notesData);
-  headlineEl.value = "";
-  noteContentEl.value = "";
+  const deleteObjEl = document.querySelector(".selected-Card");
+  if (deleteObjEl) {
+    currId = deleteObjEl.getAttribute("data-id");
+    notesData.splice(Number(currId) - 1, 1);
+
+    deleteObjEl.classList.remove("selected-Card");
+
+    setLocalStorage();
+    showNotes(notesData);
+    //  Zeilen Leeren
+    headlineEl.value = "";
+    noteContentEl.value = "";
+  }
 }
 
 function getId() {
@@ -104,4 +120,25 @@ function selectNote(id) {
   });
 
   selectedNoteEl.classList.add("selected-Card");
+}
+function setListeners() {
+  const noteCard = document.querySelectorAll(".note-Card");
+  noteCard.forEach((cardEl) => {
+    cardEl.addEventListener("click", () => {
+      selectNote(cardEl.getAttribute("data-id"));
+      const selectedHeadline = cardEl.querySelector(".card-Headline").innerHTML;
+      headlineEl.value = selectedHeadline;
+      const selectedContent = cardEl.querySelector(".card-Text").innerHTML;
+      noteContentEl.value = selectedContent;
+    });
+  });
+}
+
+function createNewNote() {
+  headlineEl.value = "";
+  noteContentEl.value = "";
+  const noteEntriesEl = document.querySelectorAll(".note-Card");
+  noteEntriesEl.forEach((note) => {
+    note.classList.remove("selected-Card");
+  });
 }
