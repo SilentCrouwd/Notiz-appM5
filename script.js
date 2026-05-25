@@ -16,6 +16,15 @@ function saveNewNote() {
   const content = noteContentEl.value;
   let currId = undefined;
 
+  // if (title.includes("<") || title.includes(">")) {
+  //   alert("Ungültige Zeichen");
+  //   return;
+  // } else if (content.includes("<") || content.includes(">")) {
+  //   alert("Ungültige Zeichen");
+  //   return;
+  // }
+  // else
+
   if (!content || !title) {
     alert("Bitte Titel und Inhalt eingeben");
     return;
@@ -38,9 +47,9 @@ function showNotes(notesArray) {
     
     
           <div class="note-Card" data-id="${note.id}">
-            <h2 class="card-Headline">${note.title}
+            <h2 class="card-Headline">${escapeHtml(note.title)}
             </h2>
-            <p class="card-Text">${note.content}
+            <p class="card-Text">${escapeHtml(note.content)}
             </p>
             <p class="card-Timestomp">${new Date(note.lastUpdated).toLocaleString("de-De")}</p>
           </div>
@@ -139,4 +148,12 @@ function delNotes() {
     headlineEl.value = "";
     noteContentEl.value = "";
   }
+}
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

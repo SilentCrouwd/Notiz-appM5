@@ -8,17 +8,34 @@
 }
 
 :root {
-  --primaryColor: rgb(231, 7, 164);
-  --primaryHover: rgba(231, 7, 164, 0.685);
-  --primaryHover-Card: rgba(231, 7, 164, 0.144);
-  --primaryText: white;
+  --primaryColor: rgb(203, 4, 253);
+  --primaryHover: rgba(203, 4, 253, 0.685);
+  --primaryHover-Card: rgba(30, 203, 226, 0.425);
+  --primaryText: black;
   --primaryBorder: solid 1px white;
   --primaryShadow: 2px 2px 4px 2px rgba(189, 189, 189, 0.5);
   --primaryBorderRadius: 0.5rem;
   --secondaryText: rgb(145, 144, 144);
+  --bg-color: #ffffff;
+  --background: linear-gradient(
+    50deg,
+    var(--primaryColor) 40%,
+    var(--secondaryText)
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #353232;
+    --primaryText: white;
+    --primaryColor: rgb(123, 3, 153);
+    --primaryShadow: 2px 2px 4px 2px rgba(255, 246, 246, 0.5);
+    --secondaryText: rgb(30, 203, 226);
+  }
 }
 body {
   min-height: 100vh;
+  background-color: var(--bg-color);
 }
 /* Defaults */
 input,
@@ -33,20 +50,30 @@ textarea:focus {
 }
 input::placeholder,
 textarea::placeholder {
-  color: gray;
+  color: var(--primaryText);
 }
 .note-Btn {
   border-radius: var(--primaryBorderRadius);
   border: var(--primaryBorder);
   color: var(--primaryText);
-  background-color: var(--primaryColor);
+  background: var(--background);
   padding: 1rem;
   cursor: pointer;
 }
-.note-Btn:hover {
-  transition: all 0.3s ease;
-  background-color: var(--primaryHover);
+.note-Btn:active {
+  scale: 0.9;
 }
+.note-Btn:hover {
+  transition: all 0.5s ease;
+  border-color: var(--secondaryText);
+  color: var(--secondaryText);
+}
+.note-Btn:hover .svg-Default {
+  fill: var(--primaryColor);
+  color: var(--secondaryText);
+  transition: all 0.5s ease;
+}
+
 .svg-Default {
   width: 2rem;
 
@@ -94,12 +121,20 @@ textarea::placeholder {
   gap: 0.5rem;
 }
 #input-Headline-Note {
+  color: var(--primaryText);
+  background-color: var(--bg-color);
   width: 100%;
   font-weight: 700;
   font-size: 3rem;
 }
 
 #input-Note-Content {
+  color: var(--secondaryText);
+  background-image: url(img/SilLogo.png);
+  background-position: center bottom;
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-color: var(--bg-color);
   font-size: 1.5rem;
   margin-left: 1rem;
   height: 80%;
@@ -115,16 +150,30 @@ textarea::placeholder {
 .note-Card {
   display: flex;
   flex-direction: column;
+  position: relative;
   padding: 1.5rem;
   box-shadow: var(--primaryShadow);
   gap: 1rem;
-  border-radius: var(--primaryBorderRadius);
+}
+
+.selected-Card::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: url(img/SilLogo.png);
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.1;
 }
 .note-Card:hover,
 .selected-Card {
-  transition: all 0.3s ease;
+  transition: all 0.3s;
   background-color: var(--primaryHover-Card);
 }
+
 .note-Card:not(.selected-Card) {
   cursor: pointer;
 }
@@ -132,6 +181,7 @@ textarea::placeholder {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--primaryText);
 }
 .card-Timestomp,
 .card-Text {
