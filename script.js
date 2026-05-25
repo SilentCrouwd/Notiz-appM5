@@ -83,22 +83,6 @@ function createNote(title, content, id = undefined) {
   }
 }
 
-function delNotes() {
-  const deleteObjEl = document.querySelector(".selected-Card");
-  if (deleteObjEl) {
-    currId = deleteObjEl.getAttribute("data-id");
-    notesData.splice(Number(currId) - 1, 1);
-
-    deleteObjEl.classList.remove("selected-Card");
-
-    setLocalStorage();
-    showNotes(notesData);
-    //  Zeilen Leeren
-    headlineEl.value = "";
-    noteContentEl.value = "";
-  }
-}
-
 function getId() {
   const notes = notesData;
 
@@ -141,4 +125,18 @@ function createNewNote() {
   noteEntriesEl.forEach((note) => {
     note.classList.remove("selected-Card");
   });
+}
+function delNotes() {
+  const notes = getLocalStorage();
+  const deleteObjEl = document.querySelector(".selected-Card");
+  if (deleteObjEl) {
+    currId = deleteObjEl.getAttribute("data-id");
+    const filterNote = notes.filter((note) => note.id != Number(currId));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filterNote));
+    deleteObjEl.classList.remove("selected-Card");
+
+    showNotes(getLocalStorage());
+    headlineEl.value = "";
+    noteContentEl.value = "";
+  }
 }
