@@ -113,6 +113,11 @@ textarea::placeholder {
   gap: 1rem;
 }
 
+.btn-Container {
+  width: fit-content;
+  display: flex;
+  gap: 1rem;
+}
 .note-Content-Header {
   width: 100%-1rem;
   display: flex;
