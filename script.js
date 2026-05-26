@@ -157,3 +157,24 @@ function escapeHtml(unsafe) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+renderQuote();
+function randomIndex() {
+  let index = Math.floor(Math.random() * quotes.length);
+  return index;
+}
+function randomizeQuote(originArray) {
+  let randomQuote = originArray[randomIndex()];
+  return randomQuote;
+}
+function renderQuote() {
+  let newQuoteEl = randomizeQuote(quotes);
+  const quoteContainer = document.querySelector(".footer-Container");
+  let html = "";
+  html = `          <p class="footer-headline">Zitat:</p>
+          <p class="footer-quote">
+     ${newQuoteEl.quote}
+          </p>
+          <p class="quote-date">${newQuoteEl.date}</p>`;
+
+  quoteContainer.innerHTML = html;
+}

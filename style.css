@@ -217,10 +217,12 @@ textarea::placeholder {
   width: 80%;
   margin: auto;
   padding-left: 0.4rem;
+  gap: 1rem;
 
   box-shadow: var(--primaryShadow);
 }
 .footer-headline {
+  text-align: center;
   color: var(--primaryText);
   font-size: 0.9rem;
 }
@@ -230,7 +232,7 @@ textarea::placeholder {
   line-height: 0.7rem;
 }
 .quote-date {
-  text-align: right;
+  text-align: center;
   font-style: italic;
   color: var(--secondaryText);
   font-size: 0.5rem;
