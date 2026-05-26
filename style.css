@@ -210,6 +210,31 @@ textarea::placeholder {
   display: flex;
   justify-content: center;
 }
+
+.footer-Container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  padding-left: 0.4rem;
+
+  box-shadow: var(--primaryShadow);
+}
+.footer-headline {
+  color: var(--primaryText);
+  font-size: 0.9rem;
+}
+.footer-quote {
+  color: var(--secondaryText);
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+}
+.quote-date {
+  text-align: right;
+  font-style: italic;
+  color: var(--secondaryText);
+  font-size: 0.5rem;
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: #353232;
@@ -263,6 +288,20 @@ textarea::placeholder {
   .card-Text {
     font-size: 1.2rem;
   }
+  .footer-Container {
+    width: 50%;
+    margin: auto;
+  }
+  .footer-headline {
+    font-size: 1.1rem;
+  }
+  .footer-quote {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  .quote-date {
+    font-size: 1rem;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
@@ -310,5 +349,18 @@ textarea::placeholder {
   }
   .card-Text {
     font-size: 2rem;
+  }
+  .footer-Container {
+    margin-bottom: 10%;
+  }
+  .footer-headline {
+    font-size: 1.1rem;
+  }
+  .footer-quote {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  .quote-date {
+    font-size: 1.2rem;
   }
 }
