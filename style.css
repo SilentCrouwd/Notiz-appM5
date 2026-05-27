@@ -48,8 +48,25 @@ input::placeholder,
 textarea::placeholder {
   color: var(--primaryText);
 }
+select {
+  display: flex;
+  align-items: center;
+  appearance: base-select;
+  padding: 0.3rem;
+  width: fit-content;
+  background-color: var(--primaryColor);
+  color: var(--primaryText);
+  border: solid 1px var(--primaryText);
+  border-radius: var(--primaryBorderRadius);
+  cursor: pointer;
+}
+select option:hover,
+select option:focus,
+select option:active {
+  background-color: var(--primaryHover-Card);
+  cursor: pointer;
+}
 .note-Btn {
-  width: 5rem;
   border-radius: var(--primaryBorderRadius);
   border: var(--primaryBorder);
   color: var(--primaryText);
@@ -92,6 +109,12 @@ textarea::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.sidebar-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .add-Note-btn {
@@ -169,13 +192,13 @@ textarea::placeholder {
   width: 100%;
   height: 100%;
   background-image: var(--bg-img);
-  background-position: center;
-  background-size: contain;
+  background-position: top right;
+  background-size: 40%;
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0.1;
+  opacity: 0.5;
 }
 .note-Card:hover,
 .selected-Card {
@@ -218,11 +241,9 @@ textarea::placeholder {
   margin: auto;
   padding-left: 0.4rem;
   gap: 1rem;
-
-  box-shadow: var(--primaryShadow);
 }
 .footer-headline {
-  text-align: center;
+  text-align: left;
   color: var(--primaryText);
   font-size: 0.9rem;
 }
@@ -232,9 +253,13 @@ textarea::placeholder {
   line-height: 0.7rem;
 }
 .quote-date {
-  text-align: center;
+  text-align: right;
   font-style: italic;
   color: var(--secondaryText);
+  font-size: 0.5rem;
+}
+.card-Kathegorie {
+  color: var(--primaryColor);
   font-size: 0.5rem;
 }
 @media (prefers-color-scheme: dark) {
@@ -304,6 +329,9 @@ textarea::placeholder {
   .quote-date {
     font-size: 1rem;
   }
+  .card-Kathegorie {
+    font-size: 1rem;
+  }
 }
 
 @media only screen and (min-width: 1400px) {
@@ -363,6 +391,9 @@ textarea::placeholder {
     line-height: 1rem;
   }
   .quote-date {
+    font-size: 1.2rem;
+  }
+  .card-Kathegorie {
     font-size: 1.2rem;
   }
 }
