@@ -9,24 +9,32 @@
   <body>
     <div class="app-Content">
       <div class="sidebar">
-        <button class="note-Btn add-Note-btn" id="add-Note">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="svg-Default svg-Add"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
+        <div class="sidebar-btn-container">
+          <button class="note-Btn add-Note-btn" id="add-Note">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="svg-Default svg-Add"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
 
-          Neue Notiz erstellen
-        </button>
+            Neue Notiz erstellen
+          </button>
+          <select name="kathegorie" id="kathegorie">
+            <option value="Arbeit">Arbeit</option>
+            <option value="Privat">Privat</option>
+            <option value="All">All</option>
+          </select>
+        </div>
+
         <div class="note-List"></div>
       </div>
       <div class="note-Content">
@@ -37,6 +45,11 @@
             id="input-Headline-Note"
           />
           <div class="btn-Container">
+            <select name="kathegorie" id="kathegorie-note">
+              <option value="Arbeit">Arbeit</option>
+              <option value="Privat">Privat</option>
+            </select>
+
             <button class="note-Btn btn-Save">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

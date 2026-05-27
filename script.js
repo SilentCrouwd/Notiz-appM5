@@ -4,28 +4,25 @@ const noteContentEl = document.getElementById("input-Note-Content");
 const saveBtn = document.querySelector(".btn-Save");
 const deleteBtn = document.querySelector(".btn-Del");
 const createNewNoteBtn = document.getElementById("add-Note");
+const dropdownSidebarEl = document.getElementById("kathegorie");
+const dropdownNoteEl = document.getElementById("kathegorie-note");
 showNotes(getLocalStorage());
+// showNotes(showKathegorie("All"));
 
 createNewNoteBtn.addEventListener("click", createNewNote);
 saveBtn.addEventListener("click", saveNewNote);
 
 deleteBtn.addEventListener("click", delNotes);
 
-
-// todo
-// 1 arrays für 2 kathegrries
-// arrays im local speichern
-// auswahl für Sidebar welche kathegorie angezeigt wird 
-// 
-
-
-
-
+dropdownSidebarEl.addEventListener("change", () => {
+  showKathegorie(dropdownSidebarEl.value);
+});
 function saveNewNote() {
   const title = headlineEl.value;
   const content = noteContentEl.value;
   let currId = undefined;
-
+  let currKathegorie = dropdownNoteEl.value;
+  console.log(currKathegorie);
   // if (title.includes("<") || title.includes(">")) {
   //   alert("Ungültige Zeichen");
   //   return;
@@ -43,7 +40,7 @@ function saveNewNote() {
     if (currSelectedNoteEl) {
       currId = currSelectedNoteEl.getAttribute("data-id");
     }
-    createNote(title, content, Number(currId));
+    createNote(title, content, Number(currId), currKathegorie);
   }
 }
 
@@ -57,12 +54,13 @@ function showNotes(notesArray) {
     
     
           <div class="note-Card" data-id="${note.id}">
-            <h2 class="card-Headline">${escapeHtml(note.title)}
+         <p class="card-Kathegorie">${note.kathegorie}</p>
+          <h2 class="card-Headline">${escapeHtml(note.title)}
             </h2>
             <p class="card-Text">${escapeHtml(note.content)}
             </p>
             <p class="card-Timestomp">${new Date(note.lastUpdated).toLocaleString("de-De")}</p>
-          </div>
+           </div>
     
     
     `;
@@ -71,7 +69,7 @@ function showNotes(notesArray) {
   setListeners();
 }
 
-function createNote(title, content, id = undefined) {
+function createNote(title, content, id = undefined, kathegorie = undefined) {
   if (id) {
     const indexOfNoteWithId = notesData.findIndex((note) => note.id === id);
     if (indexOfNoteWithId > -1) {
@@ -90,6 +88,7 @@ function createNote(title, content, id = undefined) {
       content,
       id: getId(),
       lastUpdated: new Date().getTime(),
+      kathegorie: kathegorie,
     };
 
     notesData.push(newNoteObj);
@@ -187,4 +186,15 @@ function renderQuote() {
           <p class="quote-date">${newQuoteEl.date}</p>`;
 
   quoteContainer.innerHTML = html;
+}
+function showKathegorie(kathegorie) {
+  if (kathegorie !== "All") {
+    let notes = getLocalStorage();
+    const sortedNotes = notes.filter((note) => {
+      return note.kathegorie === kathegorie;
+    });
+    showNotes(sortedNotes);
+  } else {
+    showNotes(getLocalStorage());
+  }
 }

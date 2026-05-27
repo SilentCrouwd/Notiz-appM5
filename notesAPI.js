@@ -1,6 +1,6 @@
 let notesData = [];
 let notesWork = [];
-let notesPrivart = [];
+
 const LOCAL_STORAGE_KEY = "savedNotes";
 
 function setLocalStorage() {
