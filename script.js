@@ -11,6 +11,16 @@ saveBtn.addEventListener("click", saveNewNote);
 
 deleteBtn.addEventListener("click", delNotes);
 
+
+// todo
+// 1 arrays für 2 kathegrries
+// arrays im local speichern
+// auswahl für Sidebar welche kathegorie angezeigt wird 
+// 
+
+
+
+
 function saveNewNote() {
   const title = headlineEl.value;
   const content = noteContentEl.value;
