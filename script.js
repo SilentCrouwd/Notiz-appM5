@@ -23,14 +23,6 @@ function saveNewNote() {
   let currId = undefined;
   let currKathegorie = dropdownNoteEl.value;
   console.log(currKathegorie);
-  // if (title.includes("<") || title.includes(">")) {
-  //   alert("Ungültige Zeichen");
-  //   return;
-  // } else if (content.includes("<") || content.includes(">")) {
-  //   alert("Ungültige Zeichen");
-  //   return;
-  // }
-  // else
 
   if (!content || !title) {
     alert("Bitte Titel und Inhalt eingeben");
