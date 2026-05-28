@@ -1,5 +1,5 @@
 let notesData = [];
-let notesWork = [];
+
 
 const LOCAL_STORAGE_KEY = "savedNotes";
 

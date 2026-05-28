@@ -78,6 +78,7 @@ function createNote(title, content, id = undefined, kathegorie = undefined) {
         content,
         id,
         lastUpdated: new Date().getTime(),
+        kathegorie: kathegorie,
       };
       setLocalStorage();
       showNotes(notesData);
