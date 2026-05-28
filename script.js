@@ -35,13 +35,12 @@ function saveNewNote() {
   if (!content || !title) {
     alert("Bitte Titel und Inhalt eingeben");
     return;
-  } else {
-    const currSelectedNoteEl = document.querySelector(".selected-Card");
-    if (currSelectedNoteEl) {
-      currId = currSelectedNoteEl.getAttribute("data-id");
-    }
-    createNote(title, content, Number(currId), currKathegorie);
   }
+  const currSelectedNoteEl = document.querySelector(".selected-Card");
+  if (currSelectedNoteEl) {
+    currId = currSelectedNoteEl.getAttribute("data-id");
+  }
+  createNote(title, content, Number(currId), currKathegorie);
 }
 
 function showNotes(notesArray) {
@@ -59,7 +58,7 @@ function showNotes(notesArray) {
             </h2>
             <p class="card-Text">${escapeHtml(note.content)}
             </p>
-            <p class="card-Timestomp">${new Date(note.lastUpdated).toLocaleString("de-De")}</p>
+            <p class="card-Timestomp">${new Date(note.lastUpdated).toLocaleString("de-DE")}</p>
            </div>
     
     
@@ -80,8 +79,6 @@ function createNote(title, content, id = undefined, kathegorie = undefined) {
         lastUpdated: new Date().getTime(),
         kathegorie: kathegorie,
       };
-      setLocalStorage();
-      showNotes(notesData);
     }
   } else {
     let newNoteObj = {
@@ -93,13 +90,12 @@ function createNote(title, content, id = undefined, kathegorie = undefined) {
     };
 
     notesData.push(newNoteObj);
-
-    showNotes(notesData);
-    setLocalStorage();
-
-    headlineEl.value = "";
-    noteContentEl.value = "";
   }
+  showNotes(notesData);
+  setLocalStorage();
+
+  headlineEl.value = "";
+  noteContentEl.value = "";
 }
 
 function getId() {
@@ -151,7 +147,9 @@ function delNotes() {
   if (deleteObjEl) {
     currId = deleteObjEl.getAttribute("data-id");
     const filterNote = notes.filter((note) => note.id != Number(currId));
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filterNote));
+    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filterNote));
+    notesData = filterNote;
+    setLocalStorage();
     deleteObjEl.classList.remove("selected-Card");
 
     showNotes(getLocalStorage());
